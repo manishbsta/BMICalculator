@@ -3,14 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'constants.dart';
 import 'icon_content.dart';
 
-const bottomContainerHeight = 80.0;
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
-
-enum Gender {male, female}
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -19,6 +15,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +37,9 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       child: ReusableCard(
-                        mColor: (selectedGender == Gender.male) ? activeCardColor : inactiveCardColor,
+                        mColor: (selectedGender == Gender.male)
+                            ? activeCardColor
+                            : inactiveCardColor,
                         mChild: IconContent(
                           gender: 'MALE',
                           icon: FontAwesomeIcons.mars,
@@ -56,7 +55,9 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       child: ReusableCard(
-                        mColor: (selectedGender == Gender.female) ? activeCardColor : inactiveCardColor,
+                        mColor: (selectedGender == Gender.female)
+                            ? activeCardColor
+                            : inactiveCardColor,
                         mChild: IconContent(
                           gender: 'FEMALE',
                           icon: FontAwesomeIcons.venus,
@@ -69,6 +70,40 @@ class _InputPageState extends State<InputPage> {
             ),
             Expanded(
               child: ReusableCard(
+                mChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'HEIGHT',
+                      style: kLabelTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Text(
+                          height.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Text(
+                          'cm',
+                          style: kLabelTextStyle,
+                        )
+                      ],
+                    ),
+                    Slider(
+                      min: 120.0,
+                      max: 250.0,
+                      value: height.toDouble(),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
+                  ],
+                ),
                 mColor: activeCardColor,
               ),
             ),
