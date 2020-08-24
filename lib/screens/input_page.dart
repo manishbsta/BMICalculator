@@ -1,6 +1,5 @@
 import 'package:bmi_calculator/CalculatorBrain.dart';
 import 'package:bmi_calculator/components/round_icon_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,7 +19,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-  int height = 180;
+  int height = 160;
   int weight = 50;
   int age = 23;
 
@@ -100,7 +99,7 @@ class _InputPageState extends State<InputPage> {
                       ],
                     ),
                     Slider(
-                      min: 120.0,
+                      min: 90.0,
                       max: 250.0,
                       value: height.toDouble(),
                       onChanged: (double newValue) {
@@ -214,8 +213,8 @@ class _InputPageState extends State<InputPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ResultPage(
-                              resultText: calc.getResult(),
                               bmiResult: calc.calculateBMI(),
+                              resultText: calc.getResult(),
                               suggestionText: calc.getSuggestion(),
                             )));
               },
